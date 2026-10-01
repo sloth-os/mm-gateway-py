@@ -14,10 +14,10 @@
 
 import unittest
 
-from mmgateway.models.routing_directive import RoutingDirective
+from mmgateway.models.routing_info import RoutingInfo
 
-class TestRoutingDirective(unittest.TestCase):
-    """RoutingDirective unit test stubs"""
+class TestRoutingInfo(unittest.TestCase):
+    """RoutingInfo unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,31 +25,34 @@ class TestRoutingDirective(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> RoutingDirective:
-        """Test RoutingDirective
+    def make_instance(self, include_optional) -> RoutingInfo:
+        """Test RoutingInfo
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `RoutingDirective`
+        # uncomment below to create an instance of `RoutingInfo`
         """
-        model = RoutingDirective()
+        model = RoutingInfo()
         if include_optional:
-            return RoutingDirective(
-                budget = mmgateway.models.budget_directive.BudgetDirective(
-                    limit_usd = 0.0, 
-                    scope = 'A0', ),
-                fallback = 'none',
-                max_cost_usd = 0.0,
+            return RoutingInfo(
+                attempts = 56,
+                budget = {
+                    'key' : null
+                    },
+                estimated_cost = 1.337,
+                fallback = True,
+                fallback_reason = '',
                 optimize = 'balanced',
-                profile = '0'
+                requested_model = ''
             )
         else:
-            return RoutingDirective(
+            return RoutingInfo(
+                requested_model = '',
         )
         """
 
-    def testRoutingDirective(self):
-        """Test RoutingDirective"""
+    def testRoutingInfo(self):
+        """Test RoutingInfo"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

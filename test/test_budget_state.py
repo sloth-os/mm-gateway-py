@@ -14,10 +14,10 @@
 
 import unittest
 
-from mmgateway.models.routing_directive import RoutingDirective
+from mmgateway.models.budget_state import BudgetState
 
-class TestRoutingDirective(unittest.TestCase):
-    """RoutingDirective unit test stubs"""
+class TestBudgetState(unittest.TestCase):
+    """BudgetState unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,31 +25,30 @@ class TestRoutingDirective(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> RoutingDirective:
-        """Test RoutingDirective
+    def make_instance(self, include_optional) -> BudgetState:
+        """Test BudgetState
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `RoutingDirective`
+        # uncomment below to create an instance of `BudgetState`
         """
-        model = RoutingDirective()
+        model = BudgetState()
         if include_optional:
-            return RoutingDirective(
-                budget = mmgateway.models.budget_directive.BudgetDirective(
-                    limit_usd = 0.0, 
-                    scope = 'A0', ),
-                fallback = 'none',
-                max_cost_usd = 0.0,
-                optimize = 'balanced',
-                profile = '0'
+            return BudgetState(
+                limit_usd = 1.337,
+                remaining_usd = 1.337,
+                reserved_usd = 1.337,
+                scope = '',
+                spent_usd = 1.337,
+                tasks = 56
             )
         else:
-            return RoutingDirective(
+            return BudgetState(
         )
         """
 
-    def testRoutingDirective(self):
-        """Test RoutingDirective"""
+    def testBudgetState(self):
+        """Test BudgetState"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

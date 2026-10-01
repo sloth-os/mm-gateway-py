@@ -7,6 +7,8 @@ Provider-neutral usage fields shared by all three modalities.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cost** | **float** |  | [optional] 
+**cost_source** | **str** |  | [optional] 
+**currency** | **str** |  | [optional] 
 **duration_seconds** | **float** |  | [optional] 
 **input_tokens** | **int** |  | [optional] 
 **output_count** | **int** |  | [optional] 

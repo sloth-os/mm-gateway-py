@@ -67,6 +67,10 @@ class TestMusicRequest(unittest.TestCase):
                     vocal_language = '', 
                     voice = '', ),
                 routing = mmgateway.models.routing_directive.RoutingDirective(
+                    budget = null, 
+                    fallback = 'none', 
+                    max_cost_usd = 0.0, 
+                    optimize = 'balanced', 
                     profile = '0', )
             )
         else:

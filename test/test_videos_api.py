@@ -33,6 +33,13 @@ class TestVideosApi(unittest.TestCase):
         """
         pass
 
+    def test_estimate_video(self) -> None:
+        """Test case for estimate_video
+
+        Estimate a video request
+        """
+        pass
+
     def test_get_video(self) -> None:
         """Test case for get_video
 

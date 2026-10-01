@@ -1,12 +1,16 @@
 # RoutingDirective
 
-Select a server-defined, provider-neutral routing policy.
+Steer auto mode: policy, ordering, cost ceiling, fallbacks and budget scope.  See docs/design/auto-mode.md. Every member is optional.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**profile** | **str** | Gateway-defined routing profile, such as &#x60;quality&#x60;, &#x60;fast&#x60;, or &#x60;eu&#x60;. It never names a provider or backend. | 
+**budget** | [**BudgetDirective**](BudgetDirective.md) |  | [optional] 
+**fallback** | **str** | Pinned models only: &#x60;none&#x60; (default) tries one backend, &#x60;same_model&#x60; every backend/account serving the model, &#x60;any&#x60; also the replacement and the auto candidates when the model is retired or unavailable. | [optional] 
+**max_cost_usd** | **float** | Hard per-task ceiling on the estimated cost in USD; unpriced models are excluded. | [optional] 
+**optimize** | **str** | How admissible candidates are ordered (default: the gateway&#39;s default, &#x60;balanced&#x60;). | [optional] 
+**profile** | **str** | Gateway-defined routing profile, such as &#x60;quality&#x60;, &#x60;fast&#x60;, or &#x60;eu&#x60;. It never names a provider or backend. | [optional] 
 
 ## Example
 

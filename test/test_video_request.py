@@ -56,6 +56,10 @@ class TestVideoRequest(unittest.TestCase):
                     seed = 56, 
                     watermark = True, ),
                 routing = mmgateway.models.routing_directive.RoutingDirective(
+                    budget = null, 
+                    fallback = 'none', 
+                    max_cost_usd = 0.0, 
+                    optimize = 'balanced', 
                     profile = '0', )
             )
         else:

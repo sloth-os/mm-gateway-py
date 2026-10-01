@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from mmgateway.models.resource_links import ResourceLinks
+from mmgateway.models.routing_info import RoutingInfo
 from mmgateway.models.task_error import TaskError
 from mmgateway.models.usage import Usage
 from mmgateway.models.video_output import VideoOutput
@@ -41,10 +42,11 @@ class VideoTaskResponse(BaseModel):
     model: StrictStr
     object: Optional[StrictStr] = 'video'
     outputs: Optional[List[VideoOutput]] = None
+    routing: Optional[RoutingInfo] = None
     status: StrictStr
     usage: Optional[Usage] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["completed_at", "created_at", "error", "id", "links", "metadata", "model", "object", "outputs", "status", "usage"]
+    __properties: ClassVar[List[str]] = ["completed_at", "created_at", "error", "id", "links", "metadata", "model", "object", "outputs", "routing", "status", "usage"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -117,6 +119,9 @@ class VideoTaskResponse(BaseModel):
                 if _item_outputs:
                     _items.append(_item_outputs.to_dict())
             _dict['outputs'] = _items
+        # override the default output from pydantic by calling `to_dict()` of routing
+        if self.routing:
+            _dict['routing'] = self.routing.to_dict()
         # override the default output from pydantic by calling `to_dict()` of usage
         if self.usage:
             _dict['usage'] = self.usage.to_dict()
@@ -134,6 +139,11 @@ class VideoTaskResponse(BaseModel):
         # and model_fields_set contains the field
         if self.error is None and "error" in self.model_fields_set:
             _dict['error'] = None
+
+        # set to None if routing (nullable) is None
+        # and model_fields_set contains the field
+        if self.routing is None and "routing" in self.model_fields_set:
+            _dict['routing'] = None
 
         # set to None if usage (nullable) is None
         # and model_fields_set contains the field
@@ -161,6 +171,7 @@ class VideoTaskResponse(BaseModel):
             "model": obj.get("model"),
             "object": obj.get("object") if obj.get("object") is not None else 'video',
             "outputs": [VideoOutput.from_dict(_item) for _item in obj["outputs"]] if obj.get("outputs") is not None else None,
+            "routing": RoutingInfo.from_dict(obj["routing"]) if obj.get("routing") is not None else None,
             "status": obj.get("status"),
             "usage": Usage.from_dict(obj["usage"]) if obj.get("usage") is not None else None
         })

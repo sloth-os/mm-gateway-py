@@ -33,6 +33,13 @@ class TestImagesApi(unittest.TestCase):
         """
         pass
 
+    def test_estimate_image(self) -> None:
+        """Test case for estimate_image
+
+        Estimate an image request
+        """
+        pass
+
     def test_get_image(self) -> None:
         """Test case for get_image
 

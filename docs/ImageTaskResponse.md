@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **model** | **str** |  | 
 **object** | **str** |  | [optional] [default to 'image']
 **outputs** | [**List[ImageOutput]**](ImageOutput.md) |  | [optional] 
+**routing** | [**RoutingInfo**](RoutingInfo.md) |  | [optional] 
 **status** | **str** |  | 
 **usage** | [**Usage**](Usage.md) |  | [optional] 
 

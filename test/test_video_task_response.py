@@ -46,6 +46,7 @@ class TestVideoTaskResponse(unittest.TestCase):
                 outputs = [
                     { }
                     ],
+                routing = { },
                 status = 'pending',
                 usage = { }
             )

@@ -46,6 +46,7 @@ class TestImageTaskResponse(unittest.TestCase):
                 outputs = [
                     { }
                     ],
+                routing = { },
                 status = 'pending',
                 usage = { }
             )

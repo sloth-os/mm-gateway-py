@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_video**](VideosApi.md#create_video) | **POST** /v1/videos | Create a video task
+[**estimate_video**](VideosApi.md#estimate_video) | **POST** /v1/videos/estimate | Estimate a video request
 [**get_video**](VideosApi.md#get_video) | **GET** /v1/videos/{video_id} | Retrieve a video task
 
 
@@ -89,6 +90,91 @@ Name | Type | Description  | Notes
 **403** | Key not allowed to perform the request (forbidden). |  -  |
 **404** | Model or task not found. |  -  |
 **409** | Idempotency key conflicts with an earlier request. |  -  |
+**422** | Validation Error |  -  |
+**502** | Generation service returned an error. |  -  |
+**503** | No usable generation service is configured. |  -  |
+**504** | Generation service timed out. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **estimate_video**
+> EstimateResponse estimate_video(video_request)
+
+Estimate a video request
+
+### Example
+
+* Bearer (API key) Authentication (BearerAuth):
+
+```python
+import mmgateway
+from mmgateway.models.estimate_response import EstimateResponse
+from mmgateway.models.video_request import VideoRequest
+from mmgateway.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mmgateway.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (API key): BearerAuth
+configuration = mmgateway.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with mmgateway.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mmgateway.VideosApi(api_client)
+    video_request = mmgateway.VideoRequest() # VideoRequest | 
+
+    try:
+        # Estimate a video request
+        api_response = api_instance.estimate_video(video_request)
+        print("The response of VideosApi->estimate_video:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling VideosApi->estimate_video: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **video_request** | [**VideoRequest**](VideoRequest.md)|  | 
+
+### Return type
+
+[**EstimateResponse**](EstimateResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | How auto mode would route the request, and its estimated cost. |  -  |
+**400** | Invalid request (invalid_request_error / unsupported_feature). |  -  |
+**401** | Missing or unknown API key (unauthorized). |  -  |
+**403** | Key not allowed to perform the request (forbidden). |  -  |
+**404** | Model or task not found. |  -  |
 **422** | Validation Error |  -  |
 **502** | Generation service returned an error. |  -  |
 **503** | No usable generation service is configured. |  -  |

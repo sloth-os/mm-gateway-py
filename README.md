@@ -96,12 +96,14 @@ All URIs are relative to *http://localhost*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ImagesApi* | [**create_image**](docs/ImagesApi.md#create_image) | **POST** /v1/images | Create an image task
+*ImagesApi* | [**estimate_image**](docs/ImagesApi.md#estimate_image) | **POST** /v1/images/estimate | Estimate an image request
 *ImagesApi* | [**get_image**](docs/ImagesApi.md#get_image) | **GET** /v1/images/{image_id} | Retrieve an image task
 *MetaApi* | [**get_health**](docs/MetaApi.md#get_health) | **GET** /health | Health
 *MetaApi* | [**get_metrics**](docs/MetaApi.md#get_metrics) | **GET** /metrics | Metrics
 *MetaApi* | [**list_model_limits**](docs/MetaApi.md#list_model_limits) | **GET** /v1/models/limits | List Model Limits
 *MetaApi* | [**list_models**](docs/MetaApi.md#list_models) | **GET** /v1/models | List Models
 *MusicApi* | [**create_music**](docs/MusicApi.md#create_music) | **POST** /v1/music | Create a music task
+*MusicApi* | [**estimate_music**](docs/MusicApi.md#estimate_music) | **POST** /v1/music/estimate | Estimate a music request
 *MusicApi* | [**get_music**](docs/MusicApi.md#get_music) | **GET** /v1/music/{music_id} | Retrieve a music task
 *ProxyApi* | [**proxy_request_delete**](docs/ProxyApi.md#proxy_request_delete) | **DELETE** /proxy/{domain}/{path} | Forward a request through a domain-matched proxy
 *ProxyApi* | [**proxy_request_get**](docs/ProxyApi.md#proxy_request_get) | **GET** /proxy/{domain}/{path} | Forward a request through a domain-matched proxy
@@ -110,13 +112,19 @@ Class | Method | HTTP request | Description
 *ProxyApi* | [**proxy_request_patch**](docs/ProxyApi.md#proxy_request_patch) | **PATCH** /proxy/{domain}/{path} | Forward a request through a domain-matched proxy
 *ProxyApi* | [**proxy_request_post**](docs/ProxyApi.md#proxy_request_post) | **POST** /proxy/{domain}/{path} | Forward a request through a domain-matched proxy
 *ProxyApi* | [**proxy_request_put**](docs/ProxyApi.md#proxy_request_put) | **PUT** /proxy/{domain}/{path} | Forward a request through a domain-matched proxy
+*UsageApi* | [**get_usage**](docs/UsageApi.md#get_usage) | **GET** /v1/usage | Spend and budgets of the authenticated key
 *VideosApi* | [**create_video**](docs/VideosApi.md#create_video) | **POST** /v1/videos | Create a video task
+*VideosApi* | [**estimate_video**](docs/VideosApi.md#estimate_video) | **POST** /v1/videos/estimate | Estimate a video request
 *VideosApi* | [**get_video**](docs/VideosApi.md#get_video) | **GET** /v1/videos/{video_id} | Retrieve a video task
 
 
 ## Documentation For Models
 
+ - [BudgetDirective](docs/BudgetDirective.md)
+ - [BudgetState](docs/BudgetState.md)
  - [Dimensions](docs/Dimensions.md)
+ - [EstimateCandidate](docs/EstimateCandidate.md)
+ - [EstimateResponse](docs/EstimateResponse.md)
  - [HealthResponse](docs/HealthResponse.md)
  - [ImageInput](docs/ImageInput.md)
  - [ImageOutput](docs/ImageOutput.md)
@@ -131,6 +139,7 @@ Class | Method | HTTP request | Description
  - [ModelLimitsEntry](docs/ModelLimitsEntry.md)
  - [ModelLimitsListResponse](docs/ModelLimitsListResponse.md)
  - [ModelListResponse](docs/ModelListResponse.md)
+ - [ModelSpend](docs/ModelSpend.md)
  - [MusicAudioInput](docs/MusicAudioInput.md)
  - [MusicImageInput](docs/MusicImageInput.md)
  - [MusicOutput](docs/MusicOutput.md)
@@ -140,9 +149,12 @@ Class | Method | HTTP request | Description
  - [ProblemDetail](docs/ProblemDetail.md)
  - [ResourceLinks](docs/ResourceLinks.md)
  - [RoutingDirective](docs/RoutingDirective.md)
+ - [RoutingInfo](docs/RoutingInfo.md)
  - [TaskError](docs/TaskError.md)
  - [TextInput](docs/TextInput.md)
  - [Usage](docs/Usage.md)
+ - [UsagePeriod](docs/UsagePeriod.md)
+ - [UsageResponse](docs/UsageResponse.md)
  - [VideoAudioInput](docs/VideoAudioInput.md)
  - [VideoImageInput](docs/VideoImageInput.md)
  - [VideoInput](docs/VideoInput.md)

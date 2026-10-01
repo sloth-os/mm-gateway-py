@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_image**](ImagesApi.md#create_image) | **POST** /v1/images | Create an image task
+[**estimate_image**](ImagesApi.md#estimate_image) | **POST** /v1/images/estimate | Estimate an image request
 [**get_image**](ImagesApi.md#get_image) | **GET** /v1/images/{image_id} | Retrieve an image task
 
 
@@ -89,6 +90,91 @@ Name | Type | Description  | Notes
 **403** | Key not allowed to perform the request (forbidden). |  -  |
 **404** | Model or task not found. |  -  |
 **409** | Idempotency key conflicts with an earlier request. |  -  |
+**422** | Validation Error |  -  |
+**502** | Generation service returned an error. |  -  |
+**503** | No usable generation service is configured. |  -  |
+**504** | Generation service timed out. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **estimate_image**
+> EstimateResponse estimate_image(image_request)
+
+Estimate an image request
+
+### Example
+
+* Bearer (API key) Authentication (BearerAuth):
+
+```python
+import mmgateway
+from mmgateway.models.estimate_response import EstimateResponse
+from mmgateway.models.image_request import ImageRequest
+from mmgateway.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = mmgateway.Configuration(
+    host = "http://localhost"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (API key): BearerAuth
+configuration = mmgateway.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with mmgateway.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = mmgateway.ImagesApi(api_client)
+    image_request = mmgateway.ImageRequest() # ImageRequest | 
+
+    try:
+        # Estimate an image request
+        api_response = api_instance.estimate_image(image_request)
+        print("The response of ImagesApi->estimate_image:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ImagesApi->estimate_image: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **image_request** | [**ImageRequest**](ImageRequest.md)|  | 
+
+### Return type
+
+[**EstimateResponse**](EstimateResponse.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | How auto mode would route the request, and its estimated cost. |  -  |
+**400** | Invalid request (invalid_request_error / unsupported_feature). |  -  |
+**401** | Missing or unknown API key (unauthorized). |  -  |
+**403** | Key not allowed to perform the request (forbidden). |  -  |
+**404** | Model or task not found. |  -  |
 **422** | Validation Error |  -  |
 **502** | Generation service returned an error. |  -  |
 **503** | No usable generation service is configured. |  -  |

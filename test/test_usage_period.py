@@ -14,10 +14,10 @@
 
 import unittest
 
-from mmgateway.models.routing_directive import RoutingDirective
+from mmgateway.models.usage_period import UsagePeriod
 
-class TestRoutingDirective(unittest.TestCase):
-    """RoutingDirective unit test stubs"""
+class TestUsagePeriod(unittest.TestCase):
+    """UsagePeriod unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,31 +25,28 @@ class TestRoutingDirective(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> RoutingDirective:
-        """Test RoutingDirective
+    def make_instance(self, include_optional) -> UsagePeriod:
+        """Test UsagePeriod
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `RoutingDirective`
+        # uncomment below to create an instance of `UsagePeriod`
         """
-        model = RoutingDirective()
+        model = UsagePeriod()
         if include_optional:
-            return RoutingDirective(
-                budget = mmgateway.models.budget_directive.BudgetDirective(
-                    limit_usd = 0.0, 
-                    scope = 'A0', ),
-                fallback = 'none',
-                max_cost_usd = 0.0,
-                optimize = 'balanced',
-                profile = '0'
+            return UsagePeriod(
+                end = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                kind = 'day',
+                start = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else:
-            return RoutingDirective(
+            return UsagePeriod(
+                kind = 'day',
         )
         """
 
-    def testRoutingDirective(self):
-        """Test RoutingDirective"""
+    def testUsagePeriod(self):
+        """Test UsagePeriod"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

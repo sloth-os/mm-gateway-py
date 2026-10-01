@@ -14,10 +14,10 @@
 
 import unittest
 
-from mmgateway.models.usage import Usage
+from mmgateway.models.estimate_response import EstimateResponse
 
-class TestUsage(unittest.TestCase):
-    """Usage unit test stubs"""
+class TestEstimateResponse(unittest.TestCase):
+    """EstimateResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -25,32 +25,36 @@ class TestUsage(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> Usage:
-        """Test Usage
+    def make_instance(self, include_optional) -> EstimateResponse:
+        """Test EstimateResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `Usage`
+        # uncomment below to create an instance of `EstimateResponse`
         """
-        model = Usage()
+        model = EstimateResponse()
         if include_optional:
-            return Usage(
-                cost = 1.337,
-                cost_source = 'provider',
+            return EstimateResponse(
+                budget = {
+                    'key' : null
+                    },
+                candidates = [
+                    { }
+                    ],
                 currency = 'USD',
-                duration_seconds = 1.337,
-                input_tokens = 56,
-                output_count = 56,
-                output_tokens = 56,
-                total_tokens = 56
+                estimated_cost = 1.337,
+                modality = 'image',
+                model = '',
+                object = 'estimate'
             )
         else:
-            return Usage(
+            return EstimateResponse(
+                modality = 'image',
         )
         """
 
-    def testUsage(self):
-        """Test Usage"""
+    def testEstimateResponse(self):
+        """Test EstimateResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

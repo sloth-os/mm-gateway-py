@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,13 +28,35 @@ class Usage(BaseModel):
     Provider-neutral usage fields shared by all three modalities.
     """ # noqa: E501
     cost: Optional[Union[StrictFloat, StrictInt]] = None
+    cost_source: Optional[StrictStr] = None
+    currency: Optional[StrictStr] = None
     duration_seconds: Optional[Union[StrictFloat, StrictInt]] = None
     input_tokens: Optional[StrictInt] = None
     output_count: Optional[StrictInt] = None
     output_tokens: Optional[StrictInt] = None
     total_tokens: Optional[StrictInt] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["cost", "duration_seconds", "input_tokens", "output_count", "output_tokens", "total_tokens"]
+    __properties: ClassVar[List[str]] = ["cost", "cost_source", "currency", "duration_seconds", "input_tokens", "output_count", "output_tokens", "total_tokens"]
+
+    @field_validator('cost_source')
+    def cost_source_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['provider', 'estimate']):
+            raise ValueError("must be one of enum values ('provider', 'estimate')")
+        return value
+
+    @field_validator('currency')
+    def currency_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['USD']):
+            raise ValueError("must be one of enum values ('USD')")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -87,6 +109,16 @@ class Usage(BaseModel):
         if self.cost is None and "cost" in self.model_fields_set:
             _dict['cost'] = None
 
+        # set to None if cost_source (nullable) is None
+        # and model_fields_set contains the field
+        if self.cost_source is None and "cost_source" in self.model_fields_set:
+            _dict['cost_source'] = None
+
+        # set to None if currency (nullable) is None
+        # and model_fields_set contains the field
+        if self.currency is None and "currency" in self.model_fields_set:
+            _dict['currency'] = None
+
         # set to None if duration_seconds (nullable) is None
         # and model_fields_set contains the field
         if self.duration_seconds is None and "duration_seconds" in self.model_fields_set:
@@ -125,6 +157,8 @@ class Usage(BaseModel):
 
         _obj = cls.model_validate({
             "cost": obj.get("cost"),
+            "cost_source": obj.get("cost_source"),
+            "currency": obj.get("currency"),
             "duration_seconds": obj.get("duration_seconds"),
             "input_tokens": obj.get("input_tokens"),
             "output_count": obj.get("output_count"),

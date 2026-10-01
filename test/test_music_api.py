@@ -33,6 +33,13 @@ class TestMusicApi(unittest.TestCase):
         """
         pass
 
+    def test_estimate_music(self) -> None:
+        """Test case for estimate_music
+
+        Estimate a music request
+        """
+        pass
+
     def test_get_music(self) -> None:
         """Test case for get_music
 

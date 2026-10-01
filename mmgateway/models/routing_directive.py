@@ -17,19 +17,44 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
+from mmgateway.models.budget_directive import BudgetDirective
 from typing import Optional, Set
 from typing_extensions import Self
 from pydantic_core import to_jsonable_python
 
 class RoutingDirective(BaseModel):
     """
-    Select a server-defined, provider-neutral routing policy.
+    Steer auto mode: policy, ordering, cost ceiling, fallbacks and budget scope.  See docs/design/auto-mode.md. Every member is optional.
     """ # noqa: E501
-    profile: Annotated[str, Field(min_length=1, strict=True)] = Field(description="Gateway-defined routing profile, such as `quality`, `fast`, or `eu`. It never names a provider or backend.")
-    __properties: ClassVar[List[str]] = ["profile"]
+    budget: Optional[BudgetDirective] = None
+    fallback: Optional[StrictStr] = Field(default=None, description="Pinned models only: `none` (default) tries one backend, `same_model` every backend/account serving the model, `any` also the replacement and the auto candidates when the model is retired or unavailable.")
+    max_cost_usd: Optional[Union[Annotated[float, Field(strict=True, gt=0.0)], Annotated[int, Field(strict=True, gt=0)]]] = Field(default=None, description="Hard per-task ceiling on the estimated cost in USD; unpriced models are excluded.")
+    optimize: Optional[StrictStr] = Field(default=None, description="How admissible candidates are ordered (default: the gateway's default, `balanced`).")
+    profile: Optional[Annotated[str, Field(min_length=1, strict=True)]] = Field(default=None, description="Gateway-defined routing profile, such as `quality`, `fast`, or `eu`. It never names a provider or backend.")
+    __properties: ClassVar[List[str]] = ["budget", "fallback", "max_cost_usd", "optimize", "profile"]
+
+    @field_validator('fallback')
+    def fallback_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['none', 'same_model', 'any']):
+            raise ValueError("must be one of enum values ('none', 'same_model', 'any')")
+        return value
+
+    @field_validator('optimize')
+    def optimize_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['balanced', 'cost', 'latency']):
+            raise ValueError("must be one of enum values ('balanced', 'cost', 'latency')")
+        return value
 
     model_config = ConfigDict(
         validate_by_name=True,
@@ -70,6 +95,34 @@ class RoutingDirective(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of budget
+        if self.budget:
+            _dict['budget'] = self.budget.to_dict()
+        # set to None if budget (nullable) is None
+        # and model_fields_set contains the field
+        if self.budget is None and "budget" in self.model_fields_set:
+            _dict['budget'] = None
+
+        # set to None if fallback (nullable) is None
+        # and model_fields_set contains the field
+        if self.fallback is None and "fallback" in self.model_fields_set:
+            _dict['fallback'] = None
+
+        # set to None if max_cost_usd (nullable) is None
+        # and model_fields_set contains the field
+        if self.max_cost_usd is None and "max_cost_usd" in self.model_fields_set:
+            _dict['max_cost_usd'] = None
+
+        # set to None if optimize (nullable) is None
+        # and model_fields_set contains the field
+        if self.optimize is None and "optimize" in self.model_fields_set:
+            _dict['optimize'] = None
+
+        # set to None if profile (nullable) is None
+        # and model_fields_set contains the field
+        if self.profile is None and "profile" in self.model_fields_set:
+            _dict['profile'] = None
+
         return _dict
 
     @classmethod
@@ -82,6 +135,10 @@ class RoutingDirective(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "budget": BudgetDirective.from_dict(obj["budget"]) if obj.get("budget") is not None else None,
+            "fallback": obj.get("fallback"),
+            "max_cost_usd": obj.get("max_cost_usd"),
+            "optimize": obj.get("optimize"),
             "profile": obj.get("profile")
         })
         return _obj

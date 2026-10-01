@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **model** | **str** |  | 
 **object** | **str** |  | [optional] [default to 'music']
 **outputs** | [**List[MusicOutput]**](MusicOutput.md) |  | [optional] 
+**routing** | [**RoutingInfo**](RoutingInfo.md) |  | [optional] 
 **status** | **str** |  | 
 **usage** | [**Usage**](Usage.md) |  | [optional] 
 
