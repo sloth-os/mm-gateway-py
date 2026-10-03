@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | The image task was accepted. |  * ETag - Version identifier for conditional retrieval. <br>  * Idempotency-Replayed - true when the response replays an earlier create request. <br>  * Link - Canonical task URL with rel&#x3D;\&quot;self\&quot;. <br>  * Location - Canonical URL of the created task resource. <br>  * Retry-After - Suggested number of seconds before polling again. <br>  |
+**202** | The image task was accepted. |  * ETag - Version identifier for conditional polling. <br>  * Idempotency-Replayed - true when the response replays an earlier create request. <br>  * Link - Canonical task URL with rel&#x3D;\&quot;self\&quot;. <br>  * Location - Canonical URL of the created task resource. <br>  * Retry-After - Suggested number of seconds before polling again. <br>  |
 **400** | Invalid request (invalid_request_error / unsupported_feature). |  -  |
 **401** | Missing or unknown API key (unauthorized). |  -  |
 **403** | Key not allowed to perform the request (forbidden). |  -  |
