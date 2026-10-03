@@ -20,6 +20,7 @@ __version__ = "0.1.0"
 __all__ = [
     "AudioApi",
     "ImagesApi",
+    "ManagementApi",
     "MetaApi",
     "MusicApi",
     "ProxyApi",
@@ -38,12 +39,16 @@ __all__ = [
     "AudioParameters",
     "AudioRequest",
     "AudioTaskResponse",
+    "BackendCredential",
+    "BackendRuntime",
     "BudgetDirective",
     "BudgetState",
+    "CounterSample",
     "Dimensions",
     "EstimateCandidate",
     "EstimateResponse",
     "HealthResponse",
+    "HistogramSample",
     "ImageInput",
     "ImageOutput",
     "ImageParameters",
@@ -53,6 +58,20 @@ __all__ = [
     "InputInner1",
     "InputInner2",
     "LyricsInput",
+    "ManagedBackend",
+    "ManagedBudget",
+    "ManagedKey",
+    "ManagedProxy",
+    "ManagedRoutingProfile",
+    "ManagedTask",
+    "ManagedUsage",
+    "ManagementConfigInput",
+    "ManagementConfigOutput",
+    "ManagementConfigResponse",
+    "ManagementMetrics",
+    "ManagementStatus",
+    "ManagementTaskList",
+    "ManagementUsageList",
     "ModelEntry",
     "ModelLimitsEntry",
     "ModelLimitsListResponse",
@@ -65,9 +84,12 @@ __all__ = [
     "MusicRequest",
     "MusicTaskResponse",
     "ProblemDetail",
+    "ProxyAccount",
+    "ProxyRuntime",
     "ResourceLinks",
     "RoutingDirective",
     "RoutingInfo",
+    "SelectionHealth",
     "TaskError",
     "TextInput",
     "Usage",
@@ -91,6 +113,7 @@ __all__ = [
 # import apis into sdk package
 from mmgateway.api.audio_api import AudioApi as AudioApi
 from mmgateway.api.images_api import ImagesApi as ImagesApi
+from mmgateway.api.management_api import ManagementApi as ManagementApi
 from mmgateway.api.meta_api import MetaApi as MetaApi
 from mmgateway.api.music_api import MusicApi as MusicApi
 from mmgateway.api.proxy_api import ProxyApi as ProxyApi
@@ -113,12 +136,16 @@ from mmgateway.models.audio_output import AudioOutput as AudioOutput
 from mmgateway.models.audio_parameters import AudioParameters as AudioParameters
 from mmgateway.models.audio_request import AudioRequest as AudioRequest
 from mmgateway.models.audio_task_response import AudioTaskResponse as AudioTaskResponse
+from mmgateway.models.backend_credential import BackendCredential as BackendCredential
+from mmgateway.models.backend_runtime import BackendRuntime as BackendRuntime
 from mmgateway.models.budget_directive import BudgetDirective as BudgetDirective
 from mmgateway.models.budget_state import BudgetState as BudgetState
+from mmgateway.models.counter_sample import CounterSample as CounterSample
 from mmgateway.models.dimensions import Dimensions as Dimensions
 from mmgateway.models.estimate_candidate import EstimateCandidate as EstimateCandidate
 from mmgateway.models.estimate_response import EstimateResponse as EstimateResponse
 from mmgateway.models.health_response import HealthResponse as HealthResponse
+from mmgateway.models.histogram_sample import HistogramSample as HistogramSample
 from mmgateway.models.image_input import ImageInput as ImageInput
 from mmgateway.models.image_output import ImageOutput as ImageOutput
 from mmgateway.models.image_parameters import ImageParameters as ImageParameters
@@ -128,6 +155,20 @@ from mmgateway.models.input_inner import InputInner as InputInner
 from mmgateway.models.input_inner1 import InputInner1 as InputInner1
 from mmgateway.models.input_inner2 import InputInner2 as InputInner2
 from mmgateway.models.lyrics_input import LyricsInput as LyricsInput
+from mmgateway.models.managed_backend import ManagedBackend as ManagedBackend
+from mmgateway.models.managed_budget import ManagedBudget as ManagedBudget
+from mmgateway.models.managed_key import ManagedKey as ManagedKey
+from mmgateway.models.managed_proxy import ManagedProxy as ManagedProxy
+from mmgateway.models.managed_routing_profile import ManagedRoutingProfile as ManagedRoutingProfile
+from mmgateway.models.managed_task import ManagedTask as ManagedTask
+from mmgateway.models.managed_usage import ManagedUsage as ManagedUsage
+from mmgateway.models.management_config_input import ManagementConfigInput as ManagementConfigInput
+from mmgateway.models.management_config_output import ManagementConfigOutput as ManagementConfigOutput
+from mmgateway.models.management_config_response import ManagementConfigResponse as ManagementConfigResponse
+from mmgateway.models.management_metrics import ManagementMetrics as ManagementMetrics
+from mmgateway.models.management_status import ManagementStatus as ManagementStatus
+from mmgateway.models.management_task_list import ManagementTaskList as ManagementTaskList
+from mmgateway.models.management_usage_list import ManagementUsageList as ManagementUsageList
 from mmgateway.models.model_entry import ModelEntry as ModelEntry
 from mmgateway.models.model_limits_entry import ModelLimitsEntry as ModelLimitsEntry
 from mmgateway.models.model_limits_list_response import ModelLimitsListResponse as ModelLimitsListResponse
@@ -140,9 +181,12 @@ from mmgateway.models.music_parameters import MusicParameters as MusicParameters
 from mmgateway.models.music_request import MusicRequest as MusicRequest
 from mmgateway.models.music_task_response import MusicTaskResponse as MusicTaskResponse
 from mmgateway.models.problem_detail import ProblemDetail as ProblemDetail
+from mmgateway.models.proxy_account import ProxyAccount as ProxyAccount
+from mmgateway.models.proxy_runtime import ProxyRuntime as ProxyRuntime
 from mmgateway.models.resource_links import ResourceLinks as ResourceLinks
 from mmgateway.models.routing_directive import RoutingDirective as RoutingDirective
 from mmgateway.models.routing_info import RoutingInfo as RoutingInfo
+from mmgateway.models.selection_health import SelectionHealth as SelectionHealth
 from mmgateway.models.task_error import TaskError as TaskError
 from mmgateway.models.text_input import TextInput as TextInput
 from mmgateway.models.usage import Usage as Usage

@@ -114,6 +114,7 @@ AuthSettings = TypedDict(
     "AuthSettings",
     {
         "BearerAuth": BearerFormatAuthSetting,
+        "ManagementAuth": BearerFormatAuthSetting,
     },
     total=False,
 )
@@ -537,6 +538,14 @@ class Configuration:
                 'type': 'bearer',
                 'in': 'header',
                 'format': 'API key',
+                'key': 'Authorization',
+                'value': 'Bearer ' + self.access_token
+            }
+        if self.access_token is not None:
+            auth['ManagementAuth'] = {
+                'type': 'bearer',
+                'in': 'header',
+                'format': 'Management API key',
                 'key': 'Authorization',
                 'value': 'Bearer ' + self.access_token
             }
